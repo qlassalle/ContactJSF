@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
+    </head>
+
+    <nav class="navbar navbar-default">
+        <div class="row">
+            <ul class="nav navbar-nav col-md-8">
+                <li class="col-md-3">
+                    <h:link value="#{msgs['main.accueil']}" outcome="/welcome-page"/>
+                </li>
+                <li class="col-md-3">
+                    <h:link value="#{msgs['main.ajouter']}" outcome="/contact/createContact"/>
+                </li>
+                <li class="col-md-3">
+                    <h:link value="#{msgs['groupe.ajouter']}" outcome="/contact/createContact"/>
+                </li>
+                <li class="col-md-3">
+                    <h:link value="#{msgs['address.ajouter']}" outcome="/contact/createContact"/>
+                </li>
+            </ul>
+            <div class="col-md-4">
+                <!--<html:form action="/SearchContact" styleClass="navbar-form inline-form" method = "post">
+                    <div class="form-group">
+                        <html:text property ="firstName" styleClass="input-md form-control"/>
+                        <html:submit styleClass="btn btn-primary btn-md" value = "Rechercher un contact"/>
+                    </div>
+                </html:form>-->
+            </div>
+        </div>
+    </nav>
+
+</f:view>
+</html>

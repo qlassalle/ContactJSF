@@ -1,0 +1,63 @@
+th, td
+{
+    text-align: center;
+}
+
+.navbar
+{
+    margin-bottom:0;
+    padding-top:15px;
+    text-align: center;
+    position: relative;
+}
+
+.validerForm
+{
+    margin-top:10px;
+}
+
+.formName
+{
+    margin-top:25px;
+    margin-bottom:15px;
+    text-align: center;
+}
+
+.inputForm
+{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.lesGroupes {
+	margin-top: 50px;
+	text-align: center;
+}
+
+label
+{
+    margin-top:10px;
+}
+
+.contactAdresse, .contactNumbers, .contactGroupe .ajoutContactGroupe {
+	margin-top: 30px;
+}
+
+.ajoutAttribut {
+	font-size: 14px;
+	text-align: center;
+	margin-top: 25px;
+}
+
+.contactCheckbox {
+	padding: 3px;
+}
+
+.groupeNone {
+	text-align: center;
+	margin-top: 50px;
+}
+
+.centeredText {
+	text-align: center!important;;
+}

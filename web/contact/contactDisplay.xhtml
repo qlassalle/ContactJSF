@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://java.sun.com/jsf/html">
+<f:view>
+
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+            <h1><h:outputText value="#{msgs['main.listContact']}"/></h1>
+        </div>
+        <div class="col-md-offset-3 col-md-1 add-btn">
+            <h1>
+                <h:link outcome="contact/createContact.jsp">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                </h:link>
+            </h1>
+        </div>
+    </div>
+    <h:dataTable styleClass="table table-striped table-bordered" value="#{contact.lesContacts}" var="elem">
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="#{msgs['contact.prenom']}"/>
+            </f:facet>
+            <h:outputText value="#{elem.firstName}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="#{msgs['contact.nom']}"/>
+            </f:facet>
+            <h:outputText value="#{elem.lastName}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="#{msgs['contact.email']}"/>
+            </f:facet>
+            <h:outputText value="#{elem.email}"/>
+        </h:column>
+        <h:column>
+            <h:link outcome="contact/updateContact?id=#{elem.id}">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </h:link>
+        </h:column>
+        <h:column>
+            <h:form>
+                <h:commandLink action="#{contact.deleteContact}">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <f:param name="id" value="#{elem.id}"/>
+                </h:commandLink>
+            </h:form>
+        </h:column>
+    </h:dataTable>
+</f:view>
+</html>
