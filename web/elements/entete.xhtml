@@ -3,13 +3,11 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
+>
 
     <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
     </head>
 
     <nav class="navbar navbar-default">
@@ -22,10 +20,10 @@
                     <h:link value="#{msgs['main.ajouter']}" outcome="/contact/createContact"/>
                 </li>
                 <li class="col-md-3">
-                    <h:link value="#{msgs['groupe.ajouter']}" outcome="/contact/createContact"/>
+                    <h:link value="#{msgs['address.ajouter']}" outcome="/address/createAddress"/>
                 </li>
                 <li class="col-md-3">
-                    <h:link value="#{msgs['address.ajouter']}" outcome="/contact/createContact"/>
+                    <h:link value="#{msgs['groupe.ajouter']}" outcome="/contact/createContact"/>
                 </li>
             </ul>
             <div class="col-md-4">
@@ -38,6 +36,4 @@
             </div>
         </div>
     </nav>
-
-</f:view>
 </html>

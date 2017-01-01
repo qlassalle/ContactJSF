@@ -1,31 +1,28 @@
 package daos;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
 import models.Contact;
 import models.Groupe;
 
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class DAOGroupe {
-	
+
 	private static Connection connexion;
-	
+
 	public DAOGroupe() {
 		connexion = GlobalConnection.getInstance();
 	}
-	
+
 	public String save(String name) {
 		connexion = GlobalConnection.getInstance();
-		Statement stmt;
+		String req = "INSERT INTO groupe(nom) VALUES (?)";
 		try {
-			stmt = connexion.createStatement();
-			stmt.executeUpdate("insert into groupe(nom) values (\"" + name + "\");");
-			stmt.close();
+			try (PreparedStatement pstmt = connexion.prepareStatement(req)) {
+				pstmt.setString(1, name);
+				pstmt.executeUpdate();
+			}
 			return null;
 		} catch (SQLException sqle) {
 			return sqle.getMessage();
@@ -42,7 +39,7 @@ public class DAOGroupe {
 			try (Statement stmt = connexion.createStatement()) {
 				result = stmt.executeQuery("select * from groupe order by nom asc");
 				while(result.next()) {
-					lesGroupes.add(new Groupe(result.getInt(1), result.getString(2)));		
+					lesGroupes.add(new Groupe(result.getInt(1), result.getString(2)));
 				}
 			} finally {
 				if(result != null) {
@@ -76,36 +73,39 @@ public class DAOGroupe {
 		return null;
 	}
 
-	public void AddContact(int id, String[] ids) {
+	public void AddContact(int id, List<String> ids) {
 		deleteAllContacts(id);
+		// the user wants to remove all the users from the group
+		if (ids == null) return;
 		connexion = GlobalConnection.getInstance();
-		Statement stmt;
-		String req;
+		String req = "INSERT INTO contact_groupe(idGroupe, idContact) VALUES(?, ?)";
 		try {
 			for(String contact : ids) {
-				req = "insert into contact_groupe(idGroupe, idContact) values("+id+"," +contact+");";
-				stmt = connexion.createStatement();
-				stmt.executeUpdate(req);
-				stmt.close();
+				try (PreparedStatement pstmt = connexion.prepareStatement(req)) {
+					pstmt.setInt(1, id);
+					pstmt.setInt(2, Integer.valueOf(contact));
+					pstmt.executeUpdate();
+				}
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		} finally {
 			GlobalConnection.closeConnection(connexion);
-		}	
+		}
 	}
-	
+
 	public List<Contact> getMembres(int idGroupe)
 	{
 		connexion = GlobalConnection.getInstance();
 		List<Contact> lesContacts = new ArrayList<Contact>();
 		DAOContact daoc = new DAOContact();
 		ResultSet result = null;
+		String req = "SELECT * FROM contact_groupe WHERE idGroupe = ?";
 		try {
-			try(Statement stmt = connexion.createStatement()) {
-				result = stmt.executeQuery("select * from contact_groupe where idGroupe = " + idGroupe);
+			try (PreparedStatement pstmt = connexion.prepareStatement(req)) {
+				pstmt.setInt(1, idGroupe);
+				result = pstmt.executeQuery();
 				while(result.next()) {
-					System.out.println(result.getInt("idContact"));
 					lesContacts.add(daoc.getContactById(result.getInt("idContact")));
 				}
 			} finally {
@@ -115,7 +115,7 @@ public class DAOGroupe {
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
-		} 
+		}
 		finally {
 			GlobalConnection.closeConnection(connexion);
 		}
@@ -138,7 +138,7 @@ public class DAOGroupe {
 			GlobalConnection.closeConnection(connexion);
 		}
 	}
-	
+
 	private void deleteAllContacts(int idGroupe) {
 		connexion = GlobalConnection.getInstance();
 		String req = "delete from contact_groupe where idGroupe = ?";

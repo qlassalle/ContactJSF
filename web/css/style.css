@@ -61,3 +61,7 @@ label
 .centeredText {
 	text-align: center!important;;
 }
+
+.jsf-checkbox {
+    margin-right: 10px;
+}

@@ -1,9 +1,9 @@
 package services;
 
-import java.util.List;
-
 import daos.DAOAddress;
 import models.Address;
+
+import java.util.List;
 
 public class AddressService {
 

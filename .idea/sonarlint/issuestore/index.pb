@@ -1,0 +1,66 @@
+
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+G
+src/models/Contact.java,f/e/fe28e41e47016a60db06607b3b3533921fc28b53
+?
+web/login.xhtml,a/3/a33720f4d255f58e1df1fffa813bba8f220ea695
+K
+src/managed/beans/Bean.java,6/1/615b9038a78c63a667f61aa19e1988d4d4795f44
+F
+web/welcome-page.xhtml,d/8/d851b925cd1a9ba6b1340ee1a5c68bf9fbbbe153
+L
+web/WEB-INF/faces-config.xml,9/9/99b16d0fbf6b6cc43bc74c21b6854812f1b56330
+H
+src/daos/DAOContact.java,2/4/24a2ee714dd2a06827a8b498a537bb8cc732c7c9
+N
+src/daos/GlobalConnection.java,3/7/3755aa8360431373f356616b3baa1ff87f3f5748
+R
+"src/managed/beans/AdresseBean.java,e/3/e357a7b3d7c44891e769b9b2f4216af9c6d832f4
+R
+"src/managed/beans/ContactBean.java,7/1/7121a11dedf45798fe897f1355ebb0586d54b89e
+P
+ web/address/addressDisplay.xhtml,6/b/6bb05d8d4d1753cd6ed449ffd32d65f31a909774
+O
+web/contact/createContact.xhtml,3/e/3e6807de908eac137111a7e50ffd9fc80c96ed1a
+P
+ web/contact/contactDisplay.xhtml,9/0/90fd18a778f37e4cef20c74de3447c000030f258
+O
+web/contact/updateContact.xhtml,f/a/fa7d4b4d34d01166da93db6d0e835894e500d28b
+I
+web/elements/entete.xhtml,a/b/abf682792f70e0672263596bae52f03df4602141
+c
+3src/internationalization/Resources_fr_FR.properties,2/a/2a8cb76b12d3a76e0bdab7be4c5a36b299984ac7
+]
+-src/internationalization/Resources.properties,f/3/f3471e4db55920c71c9729c5db547c79998db518
+O
+web/address/createAddress.xhtml,7/9/793c18446c051d064b9f5cfed4f01d1806141ee1
+H
+src/daos/DAOAddress.java,a/b/abbc8d00141f6c5743c341bf58d661807717ca69
+F
+src/ControlAccess.java,d/7/d7b796ff0955ecea4dede9d0d371dbc191fcecca
+G
+src/daos/DAOGroupe.java,5/7/575e7444b8d6129387e2800d6e4e195bc877890b
+L
+src/daos/DAOPhoneNumber.java,9/7/97e7a6676ba2010943233ad142b384191ac27a4a
+O
+web/address/updateAddress.xhtml,2/c/2cc58be13aed1c1bd94f3f6df5d89491bc94c6b6
+R
+"src/managed/beans/AccueilBean.java,4/6/46c6cd58e4ef4df09cb8be6923b49ddf2f46f27e
+F
+src/models/Groupe.java,6/6/6649fe1a3c336b98f1c77fe6dfd00bc0a4c2b0a8
+N
+web/elements/enteteLogin.xhtml,f/8/f85d559b1908cda4cb08f9003590db652085abe8
+L
+web/group/groupDisplay.xhtml,6/9/69e391e75514ba51979fc2d68cfb19106236f402
+Q
+!src/managed/beans/GroupeBean.java,c/9/c90a6d32693e96539dd0f7db29d1668060843f48
+K
+web/group/createGroup.xhtml,a/a/aa8dc4876ad2cc90ac191444a5af3377143a1ecc
+O
+web/group/addContactGroup.xhtml,e/2/e2e080618e0739a6e1ddb99c2ef15adfac8bd5c4
+O
+src/services/GroupeService.java,2/f/2f5e050df85d59d064149251ce042f22e4b4b44e

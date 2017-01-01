@@ -9,8 +9,14 @@
 
     <ui:include src="elements/entete.xhtml"/>
 
+    <head>
+        <title><h:outputText value="#{msgs['application.name']}"/></title>
+    </head>
+
     <h1 class="centeredText"><h:outputLabel value="#{msgs['application.name']}"/></h1>
 
     <ui:include src="contact/contactDisplay.xhtml"/>
+    <ui:include src="address/addressDisplay.xhtml"/>
+    <ui:include src="group/groupDisplay.xhtml"/>
 </f:view>
 </html>

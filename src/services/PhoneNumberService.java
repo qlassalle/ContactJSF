@@ -1,9 +1,9 @@
 package services;
 
-import java.util.List;
-
 import daos.DAOPhoneNumber;
 import models.PhoneNumber;
+
+import java.util.List;
 
 public class PhoneNumberService {
 

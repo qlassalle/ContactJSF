@@ -1,37 +1,38 @@
 package daos;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import models.Address;
+import models.Contact;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import models.Address;
-import models.Contact;
-
 public class DAOContact {
 
+	private static final String MAIL_ERROR = "contactAlreadyExists";
 	private static Connection connexion;
-	
+
 	public DAOContact() {
 		connexion = GlobalConnection.getInstance();
 	}
 
 	public String save(String nom, String prenom, String email) {
+		// check if a user doesn't already exist with this email
+		if (emailExists(email)) return MAIL_ERROR;
 		connexion = GlobalConnection.getInstance();
-		Statement stmt;
+		String req = "INSERT INTO contact(nom, prenom, email) VALUES(?, ?, ?)";
 		try {
-			stmt = connexion.createStatement();
-			stmt.executeUpdate("insert into contact(nom, prenom, email) values(\"" + nom + "\",\""
-					+ prenom + "\",\"" + email + "\");");
-			stmt.close();
+			try (PreparedStatement pstmt = connexion.prepareStatement(req)) {
+				pstmt.setString(1, nom);
+				pstmt.setString(2, prenom);
+				pstmt.setString(3, email);
+				pstmt.executeUpdate();
+			}
 			return null;
-
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return e.getMessage();
 		}
 		finally {
@@ -41,9 +42,7 @@ public class DAOContact {
 
 	public String update(int id, String nom, String prenom, String email) {
 		connexion = GlobalConnection.getInstance();
-		int result = 0;
 		String req = "update contact set id = ?, nom = ?, prenom = ?, email = ? where id = ?";
-		System.out.println(id + " " + nom + " " + prenom + " " + email);
 		try {
 			PreparedStatement stmt = connexion.prepareStatement(req);
 			stmt.setInt(1, id);
@@ -51,7 +50,7 @@ public class DAOContact {
 			stmt.setString(3, prenom);
 			stmt.setString(4, email);
 			stmt.setInt(5, id);
-			result = stmt.executeUpdate();
+			stmt.executeUpdate();
 			stmt.close();
 			return null;
 		} catch (SQLException e) {
@@ -81,8 +80,8 @@ public class DAOContact {
 		return null;
 	}
 
-	public List<Contact> getContactByFirstName(String firstName) {
-		return getContact(firstName);
+	public List<Contact> getContactByFirstName(String lastName) {
+		return getContact(lastName);
 	}
 
 	public List<Contact> getAllContacts() {
@@ -110,7 +109,7 @@ public class DAOContact {
 		return lesContacts;
 	}
 
-	public List<Contact> getContact(String firstName) {
+	public List<Contact> getContact(String lastName) {
 		connexion = GlobalConnection.getInstance();
 		List<Contact> lesContacts = new ArrayList<Contact>();
 		Contact c = null;
@@ -118,7 +117,7 @@ public class DAOContact {
 			String req = "select * from contact where nom like ?";
 			ResultSet result;
 			try (PreparedStatement stmt = connexion.prepareStatement(req)) {
-				stmt.setString(1, "%" + firstName + "%");
+				stmt.setString(1, "%" + lastName + "%");
 				result = stmt.executeQuery();
 				while (result.next()) {
 					c = new Contact(result.getInt(1), result.getString(2), result.getString(3), result.getString(4));
@@ -133,7 +132,7 @@ public class DAOContact {
 		}
 		return lesContacts;
 	}
-	
+
 	public Contact getContactById(int id) {
 		connexion = GlobalConnection.getInstance();
 		Contact c = null;
@@ -155,8 +154,8 @@ public class DAOContact {
 		}
 		return c;
 	}
-	
-	
+
+
 	public Address getContactAddress(int id)
 	{
 		connexion = GlobalConnection.getInstance();
@@ -198,9 +197,9 @@ public class DAOContact {
 		finally {
 			GlobalConnection.closeConnection(connexion);
 		}
-		
+
 	}
-	
+
 	public Map<Integer, String> getGroupes(int idContact) {
 		connexion = GlobalConnection.getInstance();
 		Map<Integer, String> lesGroupes = new HashMap<Integer, String>();
@@ -229,5 +228,25 @@ public class DAOContact {
 			GlobalConnection.closeConnection(connexion);
 		}
 		return !lesGroupes.isEmpty() ? lesGroupes : null;
+	}
+
+	private boolean emailExists(String email) {
+		connexion = GlobalConnection.getInstance();
+		try {
+			String req = "SELECT * FROM contact WHERE email = ?";
+			ResultSet result;
+			try (PreparedStatement pstmt = connexion.prepareStatement(req)) {
+				pstmt.setString(1, email);
+				result = pstmt.executeQuery();
+				if (result.next()) {
+					return true;
+				}
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		} finally {
+			GlobalConnection.closeConnection(connexion);
+		}
+		return false;
 	}
 }

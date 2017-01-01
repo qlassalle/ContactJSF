@@ -1,11 +1,11 @@
 package services;
 
-import java.util.List;
-import java.util.Map;
-
 import daos.DAOContact;
 import models.Address;
 import models.Contact;
+
+import java.util.List;
+import java.util.Map;
 
 public class ContactService {
 

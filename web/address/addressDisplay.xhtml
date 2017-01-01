@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<div class="row">
+    <div class="col-md-offset-4 col-md-4">
+        <h1><h:outputText value="#{msgs['main.listAdresse']}"/></h1>
+    </div>
+    <div class="col-md-offset-3 col-md-1 add-btn">
+        <h1>
+            <h:link outcome="address/createAddress.jsp">
+                <span class="glyphicon glyphicon-plus-sign"/>
+            </h:link>
+        </h1>
+    </div>
+</div>
+<h:dataTable styleClass="table table-striped table-bordered" value="#{accueil.lesAdresses}" var="elem">
+    <h:column>
+        <f:facet name="header">
+            <h:outputText value="#{msgs['adresse.rue']}"/>
+        </f:facet>
+        <h:outputText value="#{elem.street}"/>
+    </h:column>
+    <h:column>
+        <f:facet name="header">
+            <h:outputText value="#{msgs['adresse.ville']}"/>
+        </f:facet>
+        <h:outputText value="#{elem.city}"/>
+    </h:column>
+    <h:column>
+        <f:facet name="header">
+            <h:outputText value="#{msgs['adresse.zip']}"/>
+        </f:facet>
+        <h:outputText value="#{elem.zip}"/>
+    </h:column>
+    <h:column>
+        <f:facet name="header">
+            <h:outputText value="#{msgs['adresse.pays']}"/>
+        </f:facet>
+        <h:outputText value="#{elem.country}"/>
+    </h:column>
+    <h:column>
+        <h:link outcome="address/updateAddress?idAddress=#{elem.idAddress}">
+            <span class="glyphicon glyphicon-pencil"/>
+        </h:link>
+    </h:column>
+    <h:column>
+        <h:form>
+            <h:commandLink action="#{adresse.deleteAddress}">
+                <span class="glyphicon glyphicon-remove"/>
+                <f:param name="idAddress" value="#{elem.idAddress}"/>
+            </h:commandLink>
+        </h:form>
+    </h:column>
+</h:dataTable>
+
+</html>

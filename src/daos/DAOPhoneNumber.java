@@ -1,5 +1,7 @@
 package daos;
 
+import models.PhoneNumber;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,16 +9,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.PhoneNumber;
-
 public class DAOPhoneNumber {
 
 	private static Connection connexion;
-	
+
 	public DAOPhoneNumber () {
 		connexion = GlobalConnection.getInstance();
 	}
-	
+
 	public List<PhoneNumber> getPhoneNumbers(int idContact) {
 		connexion = GlobalConnection.getInstance();
 		List<PhoneNumber> numbers = new ArrayList<PhoneNumber>();
@@ -27,7 +27,7 @@ public class DAOPhoneNumber {
 				stmt.setInt(1, idContact);
 				result = stmt.executeQuery();
 				while(result.next()) {
-					numbers.add(new PhoneNumber(result.getInt(1), result.getString(2), result.getString(3), 
+					numbers.add(new PhoneNumber(result.getInt(1), result.getString(2), result.getString(3),
 							result.getInt(4)));
 				}
 			}
@@ -105,7 +105,7 @@ public class DAOPhoneNumber {
 				ResultSet result = pstmt.executeQuery();
 				while(result.next()) {
 					phoneNumber = new PhoneNumber(result.getInt(1),
-							result.getString(2), result.getString(3), 
+							result.getString(2), result.getString(3),
 							result.getInt(4));
 				}
 			}

@@ -14,21 +14,21 @@ public class Groupe {
 		this.name = name;
 	}
 	
-	public void setId(int value) {
-		this.id = value;
-	}
-
 	public int getId() {
 		return this.id;
 	}
 
-	public void setName(String value) {
-		this.name = value;
-	}
+    public void setId(int value) {
+        this.id = value;
+    }
 
 	public String getName() {
 		return this.name;
 	}
+
+    public void setName(String value) {
+        this.name = value;
+    }
 
 	public List<Contact> getContacts() {
 		return contacts;

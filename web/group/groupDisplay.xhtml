@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<div class="row">
+    <div class="col-md-offset-4 col-md-4">
+        <h1><h:outputText value="#{msgs['main.listGroupe']}"/></h1>
+    </div>
+    <div class="col-md-offset-3 col-md-1 add-btn">
+        <h1>
+            <h:link outcome="group/createGroup.jsp">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+            </h:link>
+        </h1>
+    </div>
+</div>
+<h:dataTable styleClass="table table-striped table-bordered" value="#{accueil.lesGroupes}" var="elem">
+    <h:column>
+        <f:facet name="header">
+            <h:outputText value="#{msgs['groupe.name']}"/>
+        </f:facet>
+        <h:outputText value="#{elem.key.name}"/>
+    </h:column>
+    <h:column>
+        <f:facet name="header">
+            <h:outputText value="#{msgs['groupe.nombre']}"/>
+        </f:facet>
+        <h:outputText value="#{elem.value}"/>
+    </h:column>
+    <h:column>
+        <h:link outcome="group/addContactGroup?idGroup=#{elem.key.id}">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </h:link>
+    </h:column>
+    <h:column>
+        <h:form>
+            <h:commandLink action="#{contact.deleteContact}">
+                <span class="glyphicon glyphicon-remove"></span>
+                <f:param name="idGroup" value="#{elem.key.id}"/>
+            </h:commandLink>
+        </h:form>
+    </h:column>
+</h:dataTable>
+
+</html>

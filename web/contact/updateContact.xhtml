@@ -46,4 +46,25 @@
             </h:form>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-offset-2 col-md-6 contactAdresse">
+            <h1 class="formName col-md-offset-4"><h:outputText value="#{msgs['adresse.contact']}"/></h1>
+            <div class="row">
+                <div class="col-md-offset-4 col-md-8">
+                    <h:form>
+                        <h:inputHidden value="#{contact.id}"/>
+                        <div class="form-group">
+                            <h:selectOneMenu value="#{contact.idAddress}">
+                                <f:selectItems value="#{accueil.lesAdresses}" var="address"
+                                               itemValue="#{address.idAddress}" itemLabel="#{address.toString()}"/>
+                            </h:selectOneMenu>
+                            <h:commandButton value="Valider" styleClass="btn btn-primary validerForm col-md-offset-4"
+                                             action="#{contact.selectAddress}"/>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </div>
 </html>

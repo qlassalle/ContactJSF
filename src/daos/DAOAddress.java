@@ -1,19 +1,15 @@
 package daos;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import models.Address;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.Address;
-
 public class DAOAddress {
-	
+
 	private static Connection connexion;
-	
+
 	public DAOAddress() {
 		connexion = GlobalConnection.getInstance();
 	}
@@ -32,8 +28,8 @@ public class DAOAddress {
 					address = new Address(result.getInt(1), result.getString(2),
 							result.getString(3), result.getString(4), result.getString(5));
 				}
-			} 
-		}catch(SQLException sqle) {
+			}
+		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		finally {
@@ -41,7 +37,6 @@ public class DAOAddress {
 		}
 		return address;
 	}
-
 
 	public int save(String street, String city, String zip, String country) {
 		connexion = GlobalConnection.getInstance();

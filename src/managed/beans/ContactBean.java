@@ -7,8 +7,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -20,29 +18,31 @@ import java.util.ResourceBundle;
 public class ContactBean extends Bean{
 
     private String firstName, lastName, email;
-    private int id;
+    private int id, idAddress;
     private ContactService cs;
-    private List<Contact> lesContacts = new ArrayList<>();
 
     @PostConstruct
     private void init() {
         cs = new ContactService();
-        lesContacts = cs.getAllContacts();
         Map<String, String> requestParameterMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        if(requestParameterMap.get("id") != null) {
-            Contact c = cs.getContactById(Integer.valueOf(requestParameterMap.get("id")));
+        if (requestParameterMap.get("idContact") != null) {
+            Contact c = cs.getContactById(Integer.valueOf(requestParameterMap.get("idContact")));
             id = (int)c.getId();
             firstName = c.getFirstName();
             lastName = c.getLastName();
             email = c.getEmail();
+            try {
+                c.setAddress(cs.getContactAddress((int) c.getId()));
+                idAddress = c.getAddress().getIdAddress();
+            } catch (NullPointerException npe) {
+                idAddress = 0;
+            }
         }
     }
 
     public String createContact() {
         if(validate()) {
-            System.out.println("validate");
             cs.addContact(lastName, firstName, email);
-            lesContacts = cs.getAllContacts();
             return "/welcome-page";
         }
         return null;
@@ -58,8 +58,12 @@ public class ContactBean extends Bean{
 
     public String deleteContact() {
         cs.delete(id);
-        lesContacts = cs.getAllContacts();
         return "welcome-page";
+    }
+
+    public String selectAddress() {
+        cs.addAddress(id, idAddress);
+        return "/welcome-page";
     }
 
     @Override
@@ -79,17 +83,7 @@ public class ContactBean extends Bean{
         return context.getMessageList().size() == 0;
     }
 
-
     /****************************************************/
-
-
-    public List<Contact> getLesContacts() {
-        return lesContacts;
-    }
-
-    public void setLesContacts(List<Contact> lesContacts) {
-        this.lesContacts = lesContacts;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -121,5 +115,13 @@ public class ContactBean extends Bean{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdAddress() {
+        return idAddress;
+    }
+
+    public void setIdAddress(int idAddress) {
+        this.idAddress = idAddress;
     }
 }

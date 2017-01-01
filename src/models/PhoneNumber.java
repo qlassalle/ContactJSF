@@ -12,36 +12,36 @@ public class PhoneNumber {
 		this.idContact = idContact;
 	}
 
-	public void setIdContact(int value) {
-		this.idContact = value;
-	}
-
 	public int getIdContact() {
 		return this.idContact;
 	}
 
-	public void setId(int value) {
-		this.id = value;
-	}
+    public void setIdContact(int value) {
+        this.idContact = value;
+    }
 
 	public int getId() {
 		return this.id;
 	}
 
-	public void setKind(String value) {
-		this.kind = value;
-	}
+    public void setId(int value) {
+        this.id = value;
+    }
 
 	public String getKind() {
 		return this.kind;
 	}
 
-	public void setNumber(String value) {
-		this.number = value;
-	}
+    public void setKind(String value) {
+        this.kind = value;
+    }
 
 	public String getNumber() {
 		return this.number;
 	}
+
+    public void setNumber(String value) {
+        this.number = value;
+    }
 
 }

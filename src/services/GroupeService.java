@@ -1,10 +1,10 @@
 package services;
 
-import java.util.List;
-
 import daos.DAOGroupe;
 import models.Contact;
 import models.Groupe;
+
+import java.util.List;
 
 public class GroupeService {
 
@@ -30,8 +30,8 @@ public class GroupeService {
 	public int getNbMembre(int id) {
 		return daog.getNbMembre(id);
 	}
-	
-	public void AddContact(int id, String[] ids) {
+
+	public void AddContact(int id, List<String> ids) {
 		daog.AddContact(id, ids);
 	}
 	
