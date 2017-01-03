@@ -2,6 +2,7 @@ package daos;
 
 import models.Address;
 import models.Contact;
+import models.Groupe;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -34,8 +35,7 @@ public class DAOContact {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return e.getMessage();
-		}
-		finally {
+		} finally {
 			GlobalConnection.closeConnection(connexion);
 		}
 	}
@@ -56,8 +56,7 @@ public class DAOContact {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return e.getMessage();
-		}
-		finally {
+		} finally {
 			GlobalConnection.closeConnection(connexion);
 		}
 	}
@@ -73,8 +72,7 @@ public class DAOContact {
 			}
 		} catch (SQLException sqle) {
 			return sqle.getMessage();
-		}
-		finally {
+		} finally {
 			GlobalConnection.closeConnection(connexion);
 		}
 		return null;
@@ -102,8 +100,7 @@ public class DAOContact {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			GlobalConnection.closeConnection(connexion);
 		}
 		return lesContacts;
@@ -126,8 +123,7 @@ public class DAOContact {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			GlobalConnection.closeConnection(connexion);
 		}
 		return lesContacts;
@@ -148,16 +144,14 @@ public class DAOContact {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
-			// no need to close here, this method is already called be a method closing connection
+		} finally {
+			// no need to close here, this method is already called by a method closing connection
 		}
 		return c;
 	}
 
 
-	public Address getContactAddress(int id)
-	{
+	public Address getContactAddress(int id) {
 		connexion = GlobalConnection.getInstance();
 		Address address = null;
 		try {
@@ -171,11 +165,9 @@ public class DAOContact {
 					address = daoa.getAddress(result.getInt(1));
 				}
 			}
-		}
-		catch(SQLException sqle) {
+		} catch(SQLException sqle) {
 			sqle.printStackTrace();
-		}
-		finally {
+		} finally {
 			GlobalConnection.closeConnection(connexion);
 		}
 		return address;
@@ -193,8 +185,7 @@ public class DAOContact {
 			}
 		} catch(SQLException sqle) {
 			return sqle.getMessage();
-		}
-		finally {
+		} finally {
 			GlobalConnection.closeConnection(connexion);
 		}
 
@@ -220,11 +211,9 @@ public class DAOContact {
 					}
 				}
 			}
-		}
-		catch(SQLException sqle) {
+		} catch(SQLException sqle) {
 			sqle.printStackTrace();
-		}
-		finally {
+		} finally {
 			GlobalConnection.closeConnection(connexion);
 		}
 		return !lesGroupes.isEmpty() ? lesGroupes : null;
@@ -248,5 +237,25 @@ public class DAOContact {
 			GlobalConnection.closeConnection(connexion);
 		}
 		return false;
+	}
+
+	public List<Groupe> getGroupeList(int id) {
+		connexion = GlobalConnection.getInstance();
+		List<Groupe> lesGroupes = new ArrayList<>();
+		DAOGroupe daog = new DAOGroupe();
+		try {
+			String req = "SELECT idGroupe FROM contact_groupe WHERE idContact = ?";
+			try (PreparedStatement pstmt = connexion.prepareStatement(req)) {
+				pstmt.setInt(1, id);
+				ResultSet result = pstmt.executeQuery();
+				while (result.next()) {
+					lesGroupes.add(new Groupe(result.getInt(1),
+							daog.getGroupeName(result.getInt(1))));
+				}
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return lesGroupes;
 	}
 }

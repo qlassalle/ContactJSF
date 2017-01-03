@@ -67,4 +67,81 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-offset-2 col-md-6 contactNumbers">
+            <h1 class="formName col-md-offset-4">
+                <h:outputText value="#{msgs['phoneNumber.contact']}"/>
+            </h1>
+            <h:dataTable styleClass="table table-striped table-bordered col-md-offset-2" value="#{contact.phone}"
+                         var="elem">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['phoneNumber.kind']}"/>
+                    </f:facet>
+                    <h:outputText value="#{elem.kind}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['phoneNumber.number']}"/>
+                    </f:facet>
+                    <h:outputText value="#{elem.number}"/>
+                </h:column>
+                <h:column>
+                    <h:link outcome="#{pageContext.request.contextPath}/phoneNumber/updatePhoneNumber?idPhoneNumber=#{elem.idPhoneNumber}">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <h:form>
+                        <h:messages/>
+                        <h:commandLink action="#{phone.deletePhoneNumber}">
+                            <span class="glyphicon glyphicon-remove"></span>
+                            <f:param name="idPhoneNumber" value="#{elem.idPhoneNumber}"/>
+                        </h:commandLink>
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+            <div class="col-md-offset-4">
+                <h:link outcome="#{pageContext.request.contextPath}/phoneNumber/createPhoneNumber?id=#{contact.id}">
+                    <p class="ajoutAttribut">
+                        <h:outputText value="#{msgs['creation.phoneNumber']}"/>
+                    </p>
+                </h:link>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-2 col-md-6 contactGroupe">
+
+            <h:panelGroup rendered="#{contact.books != null}">
+                <h1 class="formName col-md-offset-4">
+                    <h:outputText value="#{msgs['groupe.contact.list']}"/>
+                </h1>
+
+                <h:dataTable styleClass="table table-striped table-bordered col-md-offset-2"
+                             value="#{contact.books}" var="unGroupe">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs['groupe.name']}"/>
+                        </f:facet>
+                        <h:outputText value="#{unGroupe.name}"/>
+                    </h:column>
+                    <h:column>
+                        <h:form>
+                            <h:messages/>
+                            <h:commandLink action="#{groupe.removeFromGroupe}">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                <f:param name="idGroup" value="#{unGroupe.id}"/>
+                            </h:commandLink>
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+            <h1 class="col-md-offset-4 groupeNone">
+                <h:outputText value="#{msgs['groupe.none']}" rendered="#{contact.books == null}"/>
+            </h1>
+        </div>
+    </div>
 </html>

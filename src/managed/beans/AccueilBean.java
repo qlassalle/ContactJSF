@@ -31,6 +31,7 @@ public class AccueilBean {
 
     @PostConstruct
     public void init() {
+        System.out.println("called");
         lesContacts = cs.getAllContacts();
         lesAdresses = as.getAllAddresses();
         for (Groupe g : gs.getAllGroupes()) {

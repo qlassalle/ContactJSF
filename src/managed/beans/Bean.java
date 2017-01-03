@@ -8,5 +8,7 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public abstract class Bean {
 
+    public static final String WELCOME_PAGE = "/welcome-page";
+
     protected abstract boolean validate();
 }

@@ -3,6 +3,7 @@ package services;
 import daos.DAOContact;
 import models.Address;
 import models.Contact;
+import models.Groupe;
 
 import java.util.List;
 import java.util.Map;
@@ -49,5 +50,9 @@ public class ContactService {
 	
 	public Address getContactAddress(int idContact) {
 		return daoc.getContactAddress(idContact);
+	}
+
+	public List<Groupe> getGroupeList(int id) {
+		return daoc.getGroupeList(id);
 	}
 }

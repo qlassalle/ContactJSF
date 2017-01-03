@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<ui:include src="../elements/entete.xhtml"/>
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-6">
+        <h:form styleClass="form-horizontal">
+            <h:inputHidden value="#{phone.id}"/>
+            <h1 class="formName col-md-offset-4">
+                <h:outputText value="#{msgs['add.phoneNumber']}"/>
+            </h1>
+            <div class="form-group">
+
+                <label class="col-md-4 control-label"><h:outputText value="#{msgs['phoneNumber.kind']}"/></label>
+                <div class="col-md-8">
+                    <h:inputText styleClass="form-control inputForm" value="#{phone.kind}"/>
+                </div>
+
+                <label class="col-md-4 control-label"><h:outputText value="#{msgs['phoneNumber.number']}"/></label>
+                <div class="col-md-8">
+                    <h:inputText styleClass="form-control inputForm" value="#{phone.number}"/>
+                </div>
+
+                <div class="col-md-offset-7">
+                    <h:commandButton styleClass="btn btn-primary validerForm"
+                                     value="Valider" action="#{phone.createPhoneNumber}"/>
+                </div>
+            </div>
+        </h:form>
+    </div>
+</div>
+</html>

@@ -2,12 +2,12 @@ package models;
 
 public class PhoneNumber {
 
-	private int idContact, id;
-	private String kind, number;
-	
-	public PhoneNumber(int id, String kind, String number, int idContact) {
-		this.id = id;
-		this.kind = kind;
+    private int idContact, idPhoneNumber;
+    private String kind, number;
+
+    public PhoneNumber(int idPhoneNumber, String kind, String number, int idContact) {
+        this.idPhoneNumber = idPhoneNumber;
+        this.kind = kind;
 		this.number = number;
 		this.idContact = idContact;
 	}
@@ -20,12 +20,12 @@ public class PhoneNumber {
         this.idContact = value;
     }
 
-	public int getId() {
-		return this.id;
-	}
+    public int getIdPhoneNumber() {
+        return this.idPhoneNumber;
+    }
 
-    public void setId(int value) {
-        this.id = value;
+    public void setIdPhoneNumber(int value) {
+        this.idPhoneNumber = value;
     }
 
 	public String getKind() {

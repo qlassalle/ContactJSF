@@ -171,4 +171,21 @@ public class DAOGroupe {
 		}
 		return null;
 	}
+
+    public String getGroupeName(int idGroupe) {
+        connexion = GlobalConnection.getInstance();
+        String req = "SELECT nom FROM groupe WHERE id = ?";
+        try {
+            try (PreparedStatement pstmt = connexion.prepareStatement(req)) {
+                pstmt.setInt(1, idGroupe);
+                ResultSet result = pstmt.executeQuery();
+                while (result.next()) {
+                    return result.getString(1);
+                }
+            }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+        return "";
+    }
 }

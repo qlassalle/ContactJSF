@@ -1,7 +1,7 @@
 
 :
 
-.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 G
@@ -64,3 +64,33 @@ O
 web/group/addContactGroup.xhtml,e/2/e2e080618e0739a6e1ddb99c2ef15adfac8bd5c4
 O
 src/services/GroupeService.java,2/f/2f5e050df85d59d064149251ce042f22e4b4b44e
+P
+ src/services/AddressService.java,e/9/e9c00315da6dfa528c162791a30753072b2ae800
+K
+src/models/PhoneNumber.java,1/5/15c5514cc71aeda127835b24856cf98e94fd6faf
+U
+%.idea/copyright/profiles_settings.xml,8/c/8c00054dc44a9aac96957ae70e12d95773e087f7
+V
+&src/internationalization/Messages.java,3/0/306c911c5ff9ad32e669a45b544f8da6bb742d24
+[
++.idea/artifacts/ContactJSF_war_exploded.xml,2/4/2469e17fd953b1673e76efbd1b9ae78ef227dcc1
+T
+$src/services/PhoneNumberService.java,9/d/9d25941937cafcb77ebc708040e6857f112e1a59
+Q
+!.idea/libraries/Mojarra_2_2_1.xml,a/1/a1dca1eceaec500996579e66e1451818026b2e55
+C
+web/bad-login.xhtml,e/7/e70795a781ecac580891e5a1d844d30f626d46e1
+S
+#.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0
+G
+src/models/Address.java,d/4/d4d8a0799ca9173dddb0f756231b213ba9d97407
+P
+ src/services/ContactService.java,6/7/675a7053a65b5a0543ebd697a1502bd8a0b08036
+A
+web/css/style.css,e/c/ecab0569ee108c2ddca0b6b30d7cff856494a170
+W
+'web/phoneNumber/createPhoneNumber.xhtml,7/d/7d5eb6189dc7091fa17e03a08e79d7e5a84131a8
+W
+'web/phoneNumber/updatePhoneNumber.xhtml,d/0/d058d3e9713cbcefee181ea67ae269e550433ed3
+V
+&src/managed/beans/PhoneNumberBean.java,5/4/540ef04b60d3783b668cf55d58d671a1a08b8a8f

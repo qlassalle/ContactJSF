@@ -2,8 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
->
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <head>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap/css/bootstrap.css"/>
@@ -27,12 +26,13 @@
                 </li>
             </ul>
             <div class="col-md-4">
-                <!--<html:form action="/SearchContact" styleClass="navbar-form inline-form" method = "post">
+                <h:form styleClass="navbar-form inline-form">
                     <div class="form-group">
-                        <html:text property ="firstName" styleClass="input-md form-control"/>
-                        <html:submit styleClass="btn btn-primary btn-md" value = "Rechercher un contact"/>
+                        <h:inputText value="#{research.firstName}" styleClass="input-md form-control"/>
+                        <h:commandButton styleClass="btn btn-primary btn-md" value="Rechercher un contact"
+                                         action="#{research.search}"/>
                     </div>
-                </html:form>-->
+                </h:form>
             </div>
         </div>
     </nav>

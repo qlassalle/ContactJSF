@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 @ManagedBean(name = "adresse")
 public class AdresseBean extends Bean {
 
-    private int id;
+    private int idAddress;
     private String street, city, zip, country;
     private AddressService as = new AddressService();
 
@@ -25,7 +25,7 @@ public class AdresseBean extends Bean {
         Map<String, String> requestParameterMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         if (requestParameterMap.get("idAddress") != null) {
             Address a = as.getAddress(Integer.valueOf(requestParameterMap.get("idAddress")));
-            id = a.getIdAddress();
+            idAddress = a.getIdAddress();
             street = a.getStreet();
             city = a.getCity();
             zip = a.getZip();
@@ -36,22 +36,22 @@ public class AdresseBean extends Bean {
     public String createAddress() {
         if (validate()) {
             as.addAddress(street, city, zip, country);
-            return "/welcome-page";
+            return WELCOME_PAGE;
         }
         return null;
     }
 
     public String updateAddress() {
         if (validate()) {
-            as.update(street, city, zip, country, id);
-            return "/welcome-page";
+            as.update(street, city, zip, country, idAddress);
+            return WELCOME_PAGE;
         }
         return null;
     }
 
     public String deleteAddress() {
-        as.delete(id);
-        return "welcome-page";
+        as.delete(idAddress);
+        return WELCOME_PAGE;
     }
 
     @Override
@@ -77,12 +77,12 @@ public class AdresseBean extends Bean {
 
     /***********************************************************************/
 
-    public int getId() {
-        return id;
+    public int getIdAddress() {
+        return idAddress;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdAddress(int idAddress) {
+        this.idAddress = idAddress;
     }
 
     public String getStreet() {
