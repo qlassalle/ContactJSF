@@ -19,7 +19,6 @@ public class ResearchBean extends Bean {
 
     public String search() {
         lesContacts = cs.getContactByFirstName(firstName);
-        System.out.println("oui");
         return SEARCH_PAGE;
     }
 

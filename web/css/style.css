@@ -65,3 +65,15 @@ label
 .jsf-checkbox {
     margin-right: 10px;
 }
+
+.errorMessage {
+    color: RED;
+}
+
+.groupeForm > table > tbody > tr > td {
+    padding: 10px;
+}
+
+.searchForm {
+    margin-right: 5px;
+}

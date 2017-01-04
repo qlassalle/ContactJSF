@@ -14,7 +14,7 @@
 
 <div class="row">
     <div class="col-md-offset-2 col-md-6">
-        <h:form styleClass="form-horizontal">
+        <h:form styleClass="form-horizontal" id="addressForm">
             <fieldset>
                 <h1 class="formName col-md-offset-4">
                     <h:outputText value="#{msgs['address.ajouter']}"/>
@@ -23,24 +23,36 @@
 
                     <label class="col-md-4 control-label"><h:outputText value="#{msgs['adresse.rue']}"/></label>
                     <div class="col-md-8">
-                        <h:inputText styleClass="form-control inputForm" value="#{adresse.street}"/>
+                        <h:inputText styleClass="form-control inputForm" value="#{adresse.street}" id="street"/>
+                    </div>
+                    <div class="error col-md-offset-5">
+                        <h:message styleClass="errorMessage" for="street"/>
                     </div>
 
                     <label class="col-md-4 control-label"><h:outputText value="#{msgs['adresse.ville']}"/></label>
                     <div class="col-md-8">
-                        <h:inputText styleClass="form-control inputForm" value="#{adresse.city}"/>
+                        <h:inputText styleClass="form-control inputForm" value="#{adresse.city}" id="city"/>
                     </div>
-
+                    <div class="error col-md-offset-5">
+                        <h:message styleClass="errorMessage" for="city"/>
+                    </div>
 
                     <label class="col-md-4 control-label"><h:outputText value="#{msgs['adresse.zip']}"/></label>
                     <div class="col-md-8">
-                        <h:inputText styleClass="form-control inputForm" value="#{adresse.zip}"/>
+                        <h:inputText styleClass="form-control inputForm" value="#{adresse.zip}" id="zip"/>
+                    </div>
+                    <div class="error col-md-offset-5">
+                        <h:message styleClass="errorMessage" for="zip"/>
                     </div>
 
                     <label class="col-md-4 control-label"><h:outputText value="#{msgs['adresse.pays']}"/></label>
                     <div class="col-md-8">
-                        <h:inputText styleClass="form-control inputForm" value="#{adresse.country}"/>
+                        <h:inputText styleClass="form-control inputForm" value="#{adresse.country}" id="country"/>
                     </div>
+                    <div class="error col-md-offset-5">
+                        <h:message styleClass="errorMessage" for="country"/>
+                    </div>
+
                     <div class="col-md-offset-7">
                         <h:commandButton value="Valider" styleClass="btn btn-primary validerForm"
                                          action="#{adresse.createAddress}"/>

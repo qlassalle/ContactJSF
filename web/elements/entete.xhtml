@@ -28,8 +28,8 @@
             <div class="col-md-4">
                 <h:form styleClass="navbar-form inline-form">
                     <div class="form-group">
-                        <h:inputText value="#{research.firstName}" styleClass="input-md form-control"/>
-                        <h:commandButton styleClass="btn btn-primary btn-md" value="Rechercher un contact"
+                        <h:inputText value="#{research.firstName}" styleClass="input-md form-control searchForm"/>
+                        <h:commandButton styleClass="btn btn-primary btn-md" value="#{msgs['title.searchedContact']}"
                                          action="#{research.search}"/>
                     </div>
                 </h:form>

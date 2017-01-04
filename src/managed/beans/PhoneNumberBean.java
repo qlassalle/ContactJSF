@@ -1,12 +1,15 @@
 package managed.beans;
 
+import helpers.Validator;
 import models.PhoneNumber;
 import services.PhoneNumberService;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * Created by qlassalle on 02/01/2017.
@@ -37,8 +40,11 @@ public class PhoneNumberBean extends Bean {
     }
 
     public String createPhoneNumber() {
-        pns.save(kind, number, id);
-        return WELCOME_PAGE;
+        if (validate()) {
+            pns.save(kind, number, id);
+            return WELCOME_PAGE;
+        }
+        return null;
     }
 
     public String deletePhoneNumber() {
@@ -47,13 +53,31 @@ public class PhoneNumberBean extends Bean {
     }
 
     public String update() {
-        pns.update(idPhoneNumber, kind, number);
-        return WELCOME_PAGE;
+        if (validate()) {
+            pns.update(idPhoneNumber, kind, number);
+            return WELCOME_PAGE;
+        }
+        return null;
     }
 
     @Override
     protected boolean validate() {
-        return false;
+        FacesContext context = FacesContext.getCurrentInstance();
+        // load the properties file to display error messages
+        ResourceBundle msgs = context.getApplication().getResourceBundle(context, "msgs");
+        if (kind == null || kind.equals("")) {
+            context.addMessage("phoneNumberForm:kind", new FacesMessage(msgs.getString("creation.kind.error.required")));
+        }
+        if (kind.length() > 20) {
+            context.addMessage("phoneNumberForm:kind", new FacesMessage(msgs.getString("creation.kind.error.too_long")));
+        }
+        if (number == null || number.length() < 4 || number.length() > 10) {
+            context.addMessage("phoneNumberForm:number", new FacesMessage(msgs.getString("creation.number.error.required")));
+        }
+        if (!Validator.isCorrectNumber(number)) {
+            context.addMessage("phoneNumberForm:number", new FacesMessage(msgs.getString("creation.number.error.incorrect")));
+        }
+        return context.getMessageList().isEmpty();
     }
 
     /******************************************/

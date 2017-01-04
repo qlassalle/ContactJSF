@@ -10,21 +10,27 @@
 
 <div class="row">
     <div class="col-md-offset-2 col-md-6">
-        <h:form styleClass="form-horizontal">
+        <h:form styleClass="form-horizontal" id="phoneNumberForm">
             <h:inputHidden value="#{phone.idPhoneNumber}"/>
             <h1 class="formName col-md-offset-4">
-                <h:outputText value="#{msgs['add.phoneNumber']}"/>
+                <h:outputText value="#{msgs['maj.phoneNumber']}"/>
             </h1>
             <div class="form-group">
 
                 <label class="col-md-4 control-label"><h:outputText value="#{msgs['phoneNumber.kind']}"/></label>
                 <div class="col-md-8">
-                    <h:inputText styleClass="form-control inputForm" value="#{phone.kind}"/>
+                    <h:inputText styleClass="form-control inputForm" value="#{phone.kind}" id="kind"/>
+                </div>
+                <div class="error col-md-offset-5">
+                    <h:message styleClass="errorMessage" for="kind"/>
                 </div>
 
                 <label class="col-md-4 control-label"><h:outputText value="#{msgs['phoneNumber.number']}"/></label>
                 <div class="col-md-8">
-                    <h:inputText styleClass="form-control inputForm" value="#{phone.number}"/>
+                    <h:inputText styleClass="form-control inputForm" value="#{phone.number}" id="number"/>
+                </div>
+                <div class="error col-md-offset-5">
+                    <h:message styleClass="errorMessage" for="number"/>
                 </div>
 
                 <div class="col-md-offset-7">

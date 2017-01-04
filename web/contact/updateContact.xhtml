@@ -14,29 +14,34 @@
 
     <div class="row">
         <div class="col-md-offset-2 col-md-6">
-            <h:form styleClass="form-horizontal">
+            <h:form styleClass="form-horizontal" id="contactForm">
                 <div class="col-md-offset-4">
                     <h1 class="formName">
                         <h:outputText value="#{msgs['maj.contact']}"/>
                     </h1>
-                    <h3>
-                        <h:messages/>
-                    </h3>
                 </div>
                 <div class="form-group">
                     <h:inputHidden value="#{contact.id}"/>
                     <label class="col-md-4 control-label"><h:outputText value="#{msgs['contact.prenom']}"/></label>
                     <div class="col-md-8">
-                        <h:inputText required="true" requiredMessage="#{msgs['creation.fn.error.required']}"
-                                     styleClass="form-control inputForm" value="#{contact.firstName}"/>
+                        <h:inputText styleClass="form-control inputForm" value="#{contact.firstName}" id="firstName"/>
+                    </div>
+                    <div class="error col-md-offset-5">
+                        <h:message styleClass="errorMessage" for="firstName"/>
                     </div>
                     <label class="col-md-4 control-label"><h:outputText value="#{msgs['contact.nom']}"/></label>
                     <div class="col-md-8">
-                        <h:inputText styleClass="form-control inputForm" value="#{contact.lastName}"/>
+                        <h:inputText styleClass="form-control inputForm" value="#{contact.lastName}" id="lastName"/>
+                    </div>
+                    <div class="error col-md-offset-5">
+                        <h:message styleClass="errorMessage" for="lastName"/>
                     </div>
                     <label class="col-md-4 control-label"><h:outputText value="#{msgs['contact.email']}"/></label>
                     <div class="col-md-8">
-                        <h:inputText styleClass="form-control inputForm" value="#{contact.email}"/>
+                        <h:inputText styleClass="form-control inputForm" value="#{contact.email}" id="email"/>
+                    </div>
+                    <div class="error col-md-offset-5">
+                        <h:message styleClass="errorMessage" for="email"/>
                     </div>
                     <div class="col-md-offset-7">
                         <h:commandButton value="Valider" styleClass="btn btn-primary validerForm"
@@ -74,7 +79,7 @@
                 <h:outputText value="#{msgs['phoneNumber.contact']}"/>
             </h1>
             <h:dataTable styleClass="table table-striped table-bordered col-md-offset-2" value="#{contact.phone}"
-                         var="elem">
+                         var="elem" rendered="#{!contact.phone.isEmpty()}">
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="#{msgs['phoneNumber.kind']}"/>
@@ -94,7 +99,6 @@
                 </h:column>
                 <h:column>
                     <h:form>
-                        <h:messages/>
                         <h:commandLink action="#{phone.deletePhoneNumber}">
                             <span class="glyphicon glyphicon-remove"></span>
                             <f:param name="idPhoneNumber" value="#{elem.idPhoneNumber}"/>
@@ -115,7 +119,7 @@
     <div class="row">
         <div class="col-md-offset-2 col-md-6 contactGroupe">
 
-            <h:panelGroup rendered="#{contact.books != null}">
+            <h:panelGroup rendered="#{!contact.books.isEmpty()}">
                 <h1 class="formName col-md-offset-4">
                     <h:outputText value="#{msgs['groupe.contact.list']}"/>
                 </h1>
@@ -130,7 +134,6 @@
                     </h:column>
                     <h:column>
                         <h:form>
-                            <h:messages/>
                             <h:commandLink action="#{groupe.removeFromGroupe}">
                                 <span class="glyphicon glyphicon-remove"></span>
                                 <f:param name="idGroup" value="#{unGroupe.id}"/>
@@ -140,7 +143,7 @@
                 </h:dataTable>
             </h:panelGroup>
             <h1 class="col-md-offset-4 groupeNone">
-                <h:outputText value="#{msgs['groupe.none']}" rendered="#{contact.books == null}"/>
+                <h:outputText value="#{msgs['groupe.none']}" rendered="#{contact.books.isEmpty()}"/>
             </h1>
         </div>
     </div>

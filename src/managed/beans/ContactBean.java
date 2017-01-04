@@ -1,5 +1,6 @@
 package managed.beans;
 
+import helpers.Validator;
 import models.Address;
 import models.Contact;
 import models.Groupe;
@@ -108,15 +109,24 @@ public class ContactBean extends Bean{
         // load the properties file to display error messages
         ResourceBundle msgs = context.getApplication().getResourceBundle(context, "msgs");
         if(lastName == null || lastName.equals("")) {
-            context.addMessage(null, new FacesMessage(msgs.getString("creation.ln.error.required")));
+            context.addMessage("contactForm:lastName", new FacesMessage(msgs.getString("creation.ln.error.required")));
+        }
+        if (!Validator.isCorrectString(lastName)) {
+            context.addMessage("contactForm:lastName", new FacesMessage(msgs.getString("creation.ln.error.incorrect")));
         }
         if(firstName == null || firstName.equals("")) {
-            context.addMessage(null, new FacesMessage(msgs.getString("creation.fn.error.required")));
+            context.addMessage("contactForm:firstName", new FacesMessage(msgs.getString("creation.fn.error.required")));
+        }
+        if (!Validator.isCorrectString(firstName)) {
+            context.addMessage("contactForm:firstName", new FacesMessage(msgs.getString("creation.fn.error.incorrect")));
         }
         if(email == null || email.equals("")) {
-            context.addMessage(null, new FacesMessage(msgs.getString("creation.email.error.required")));
+            context.addMessage("contactForm:email", new FacesMessage(msgs.getString("creation.email.error.required")));
         }
-        return context.getMessageList().size() == 0;
+        if (!Validator.isMailCorrect(email)) {
+            context.addMessage("contactForm:email", new FacesMessage(msgs.getString("creation.email.error.incorrect")));
+        }
+        return context.getMessageList().isEmpty();
     }
 
     /****************************************************/

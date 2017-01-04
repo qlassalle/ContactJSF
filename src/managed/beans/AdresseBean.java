@@ -1,5 +1,6 @@
 package managed.beans;
 
+import helpers.Validator;
 import models.Address;
 import services.AddressService;
 
@@ -61,18 +62,30 @@ public class AdresseBean extends Bean {
         // load the properties file to display error messages
         ResourceBundle msgs = context.getApplication().getResourceBundle(context, "msgs");
         if (street == null || street.equals("")) {
-            context.addMessage(null, new FacesMessage(msgs.getString("creation.street.error.required")));
+            context.addMessage("addressForm:street", new FacesMessage(msgs.getString("creation.street.error.required")));
+        }
+        if (!Validator.isCorrectStreetName(getStreet())) {
+            context.addMessage("addressForm:street", new FacesMessage(msgs.getString("creation.street.error.incorrect")));
         }
         if (city == null || city.equals("")) {
-            context.addMessage(null, new FacesMessage(msgs.getString("creation.city.error.required")));
+            context.addMessage("addressForm:city", new FacesMessage(msgs.getString("creation.city.error.required")));
+        }
+        if (!Validator.isCorrectString(getCity())) {
+            context.addMessage("addressForm:city", new FacesMessage(msgs.getString("creation.city.error.incorrect")));
         }
         if (country == null || country.equals("")) {
-            context.addMessage(null, new FacesMessage(msgs.getString("creation.country.error.required")));
+            context.addMessage("addressForm:country", new FacesMessage(msgs.getString("creation.country.error.required")));
         }
-        if (zip == null || zip.length() > 10) {
-            context.addMessage(null, new FacesMessage(msgs.getString("creation.zip.error.required")));
+        if (!Validator.isCorrectString(getCountry())) {
+            context.addMessage("addressForm:country", new FacesMessage(msgs.getString("creation.country.error.incorrect")));
         }
-        return context.getMessageList().size() == 0;
+        if (zip == null || zip.length() > 5) {
+            context.addMessage("addressForm:zip", new FacesMessage(msgs.getString("creation.zip.error.required")));
+        }
+        if (!Validator.isCorrectNumber(getZip())) {
+            context.addMessage("addressForm:zip", new FacesMessage(msgs.getString("creation.zip.error.incorrect")));
+        }
+        return context.getMessageList().isEmpty();
     }
 
     /***********************************************************************/

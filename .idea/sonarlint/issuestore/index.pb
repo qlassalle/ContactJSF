@@ -94,3 +94,7 @@ W
 'web/phoneNumber/updatePhoneNumber.xhtml,d/0/d058d3e9713cbcefee181ea67ae269e550433ed3
 V
 &src/managed/beans/PhoneNumberBean.java,5/4/540ef04b60d3783b668cf55d58d671a1a08b8a8f
+S
+#src/managed/beans/ResearchBean.java,f/4/f47f009ed3645e9d8d21595c4878a78dcf39f7cd
+R
+"web/contact/searchedContacts.xhtml,2/7/2781a91c24b22b9f25c22ac06b6c2c8d45c23b96
